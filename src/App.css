@@ -1,0 +1,50 @@
+.App {
+  min-height: 100vh;
+  padding: 3em auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #009688;
+}
+
+.winner{
+  color: white;
+  text-align: center;
+}
+
+.winner > h1{
+  margin-bottom: 0;
+}
+
+.winner > svg{
+  height: 4em;
+}
+
+.BoardGame{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #00796B;
+  width: 10em;
+}
+
+.BoardGame > .areaGame{
+  cursor: pointer;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #009688;
+  width: 30%;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: .2em;
+  color: white;
+}
+.BoardGame > .areaGame:nth-child(7),
+.BoardGame > .areaGame:nth-child(8),
+.BoardGame > .areaGame:nth-child(9){
+  margin-bottom: 0;
+}
+
