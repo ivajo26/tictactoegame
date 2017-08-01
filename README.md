@@ -41,4 +41,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### Deploy's URL
 
-The project has deploy in a server nowjs and the url found in description
+The project has deploy in a server now.sh and the url found in description

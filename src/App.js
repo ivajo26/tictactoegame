@@ -34,13 +34,14 @@ class App extends Component {
       ],
       turn: true,
       winner: undefined,
+      draw: false,
     };
     this.onSelect= this.onSelect.bind(this);
   }
 
-  onSelect(area){
+  onSelect(area) {
     function win(areasGame, winCombinations) {
-      for(let combination in winCombinations) {
+      for (let combination in winCombinations) {
         let gamer;
         let winner = false;
         for (let a in winCombinations[combination]) {
@@ -62,7 +63,14 @@ class App extends Component {
       }
       return undefined;
     }
-
+    function checkDraw(areasGame) {
+      for(let area = 1; area <= 9; area++){
+         if (areasGame[`area${area}`] === undefined){
+           return false;
+         }
+      }
+      return true;
+    }
     let turn = this.state.turn;
     let areasGame = this.state.areasGame;
     let winCombinations = this.state.winCombinations;
@@ -70,8 +78,9 @@ class App extends Component {
       areasGame[`area${area}`]= turn;
       turn= !turn;
       let winner = win(areasGame, winCombinations);
-      areasGame = winner === undefined ? areasGame : {};
-      this.setState({turn, areasGame, winner});
+      let draw = checkDraw(areasGame);
+      areasGame = (winner !== undefined || draw) ? {} : areasGame;
+      this.setState({turn, areasGame, winner, draw});
     }
   }
   render(){
@@ -84,7 +93,8 @@ class App extends Component {
     return (
       <div className="App">
           <div className="winner">
-            { this.state.winner !== undefined && (<h1>EL ganador fue</h1>) }
+            { this.state.winner !== undefined && (<h1>The winner is</h1>) }
+            { (this.state.draw && this.state.winner === undefined) && (<h1>Is a draw</h1>) }
             { fillArea(this.state.winner)}
           </div>
           <div className="BoardGame">
