@@ -36,7 +36,8 @@ class App extends Component {
       winner: undefined,
       draw: false,
     };
-    this.onSelect= this.onSelect.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    this.onRandomPlay = this.onRandomPlay.bind(this);
   }
 
   onSelect(area) {
@@ -83,6 +84,19 @@ class App extends Component {
       this.setState({turn, areasGame, winner, draw});
     }
   }
+
+  onRandomPlay() {
+    let areasGame = this.state.areasGame;
+    let freeArea = [];
+    for (let area = 1; area <= 9; area++){
+      if (areasGame[`area${area}`] === undefined){
+        freeArea.push(area);
+      }
+    }
+    let randomSelect = Math.floor((Math.random() * freeArea.length)+1);
+    this.onSelect(randomSelect);
+  }
+
   render(){
     let fillArea = (area) => {
       if (area !== undefined){
@@ -92,6 +106,10 @@ class App extends Component {
     };
     return (
       <div className="App">
+          <div>
+            <button onClick={this.onRandomPlay} >Random Play</button>
+            <button onClick={this.onAIPlay} >AI Play</button>
+          </div>
           <div className="winner">
             { this.state.winner !== undefined && (<h1>The winner is</h1>) }
             { (this.state.draw && this.state.winner === undefined) && (<h1>Is a draw</h1>) }
